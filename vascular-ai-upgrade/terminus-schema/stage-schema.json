@@ -1,0 +1,23 @@
+{
+  "@id": "TreatmentStage",
+  "@type": "Class",
+  "@subdocument": [],
+  "stage_number": "xsd:integer",
+  "stage_name": "xsd:string",
+  "duration_days": { "@type": "Optional", "@class": "xsd:string" },
+  "procedures": {
+    "@type": "Optional",
+    "@class": {
+      "@type": "List",
+      "@class": "xsd:string"
+    }
+  },
+  "drugs": {
+    "@type": "Optional",
+    "@class": {
+      "@type": "List",
+      "@class": "Drug"
+    }
+  },
+  "success_criteria": { "@type": "Optional", "@class": "xsd:string" }
+}
