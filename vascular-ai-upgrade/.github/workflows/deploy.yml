@@ -1,0 +1,62 @@
+name: Deploy VASCULAR AI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install dependencies
+      run: |
+        npm ci
+        cd ml-service && pip install -r requirements.txt
+    
+    - name: Run tests
+      run: npm test
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Build Frontend
+      run: |
+        npm ci
+        npm run build
+    
+    - name: Build Docker images
+      run: |
+        docker-compose build
+    
+    - name: Push to registry
+      run: |
+        echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+        docker-compose push
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to server
+      uses: appleboy/ssh-action@master
+      with:
+        host: 45.82.13.148
+        username: deployer
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd /opt/vascular-ai
+          docker-compose pull
+          docker-compose up -d
+          docker system prune -f
