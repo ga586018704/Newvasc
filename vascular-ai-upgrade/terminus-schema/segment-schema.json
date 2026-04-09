@@ -1,0 +1,18 @@
+{
+  "@id": "VesselSegment",
+  "@type": "Class",
+  "@subdocument": [],
+  "segment_order": "xsd:integer",
+  "name": "xsd:string",
+  "latin_name": { "@type": "Optional", "@class": "xsd:string" },
+  "start_landmark": "xsd:string",
+  "end_landmark": "xsd:string",
+  "average_length_mm": "xsd:decimal",
+  "average_diameter_mm": "xsd:decimal",
+  "puncture_safe": "xsd:boolean",
+  "stent_approved": "xsd:boolean",
+  "variations": {
+    "@type": "Optional",
+    "@class": "xsd:string"
+  }
+}
