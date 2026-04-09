@@ -1,0 +1,78 @@
+{
+  "collection": "treatment_protocols",
+  "schema": {
+    "name": "treatment_protocols",
+    "fields": [
+      {
+        "field": "target_vessel_id",
+        "type": "uuid",
+        "schema": {
+          "foreign_key_table": "vessels"
+        }
+      },
+      {
+        "field": "condition_code",
+        "type": "string",
+        "meta": {
+          "interface": "input",
+          "options": {
+            "placeholder": "CLI_Fontaine_IV"
+          }
+        }
+      },
+      {
+        "field": "source_document",
+        "type": "string",
+        "meta": {
+          "interface": "input",
+          "note": "Приказ МЗ РФ № 123н, ESC/ESVS 2023"
+        }
+      },
+      {
+        "field": "evidence_level",
+        "type": "string",
+        "schema": {
+          "default_value": "B"
+        },
+        "meta": {
+          "interface": "select-radio",
+          "options": {
+            "choices": [
+              { "text": "Level A", "value": "A" },
+              { "text": "Level B", "value": "B" },
+              { "text": "Level C", "value": "C" }
+            ]
+          }
+        }
+      },
+      {
+        "field": "treatment_stages",
+        "type": "json",
+        "meta": {
+          "interface": "list",
+          "options": {
+            "template": {
+              "stage_number": 1,
+              "stage_name": "Консервативная терапия",
+              "duration": "14-30 дней",
+              "drugs": [],
+              "procedures": [],
+              "indications": [],
+              "contraindications": []
+            }
+          }
+        }
+      },
+      {
+        "field": "decision_tree",
+        "type": "json",
+        "meta": {
+          "interface": "code",
+          "options": {
+            "language": "json"
+          }
+        }
+      }
+    ]
+  }
+}
