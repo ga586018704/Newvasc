@@ -1,80 +1,37 @@
 {
-  "collection": "vessels",
-  "schema": {
-    "name": "vessels",
-    "sql": "CREATE TABLE vessels (...)",
-    "fields": [
-      {
-        "field": "latin_name",
-        "type": "string",
-        "schema": {
-          "is_nullable": false,
-          "is_unique": true
-        },
-        "meta": {
-          "interface": "input",
-          "options": {
-            "placeholder": "Arteria femoralis communis"
-          }
-        }
-      },
-      {
-        "field": "russian_name",
-        "type": "string",
-        "meta": {
-          "interface": "input",
-          "special": ["translations"]
-        }
-      },
-      {
-        "field": "segments",
-        "type": "json",
-        "meta": {
-          "interface": "json",
-          "options": {
-            "template": [
-              {
-                "id": "segment_1",
-                "name": "Проксимальный сегмент",
-                "boundaries": ["T12", "L3"],
-                "length_mm": "100-120",
-                "diameter_mm": "8-10",
-                "variations": []
-              }
-            ]
-          }
-        }
-      },
-      {
-        "field": "topography_relations",
-        "type": "alias",
-        "schema": {
-          "foreign_key_column": "vessel_id",
-          "foreign_key_table": "topographic_relations"
-        },
-        "meta": {
-          "interface": "list-o2m",
-          "special": ["o2m"]
-        }
-      },
-      {
-        "field": "illustrations",
-        "type": "json",
-        "meta": {
-          "interface": "file-preview",
-          "options": {
-            "fields": ["svg_schematic", "photo_real", "dicom_mask", "model_3d"]
-          }
-        }
-      },
-      {
-        "field": "treatment_protocols",
-        "type": "alias",
-        "schema": {
-          "foreign_key_table": "treatment_protocols",
-          "foreign_key_column": "target_vessel_id"
-        }
-      }
-    ]
-  }
+  "@type": "@context",
+  "@schema": "http://vascular.ai/schema#",
+  "@base": "http://vascular.ai/data/"
+}
+{
+  "@id": "Vessel",
+  "@type": "Class",
+  "@key": { "@type": "Lexical", "@fields": ["latin_name"] },
+  "latin_name": "xsd:string",
+  "russian_name": "xsd:string",
+  "english_name": { "@type": "Optional", "@class": "xsd:string" },
+  "category": {
+    "@type": "Enum",
+    "@id": "VesselCategory",
+    "@values": ["artery", "vein", "lymphatic", "anomalous"]
+  },
+  "parent_vessel": { "@type": "Optional", "@class": "Vessel" },
+  "segments": {
+    "@type": "Set",
+    "@class": "VesselSegment"
+  },
+  "topography": {
+    "@type": "Set",
+    "@class": "TopographicRelation"
+  },
+  "protocols": {
+    "@type": "Set",
+    "@class": "TreatmentProtocol"
+  },
+  "illustrations": {
+    "@type": "Optional",
+    "@class": "Illustrations"
+  },
+  "dicom_mask_url": { "@type": "Optional", "@class": "xsd:string" },
+  "model_3d_url": { "@type": "Optional", "@class": "xsd:string" }
 }
