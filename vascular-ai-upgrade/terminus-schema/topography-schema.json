@@ -1,0 +1,83 @@
+{
+  "collection": "topographic_relations",
+  "schema": {
+    "name": "topographic_relations",
+    "fields": [
+      {
+        "field": "vessel_id",
+        "type": "uuid",
+        "schema": {
+          "foreign_key_table": "vessels",
+          "foreign_key_column": "id"
+        }
+      },
+      {
+        "field": "related_structure",
+        "type": "string",
+        "meta": {
+          "interface": "input",
+          "options": {
+            "placeholder": "Бедренная вена, N. femoralis"
+          }
+        }
+      },
+      {
+        "field": "relation_type",
+        "type": "string",
+        "schema": {
+          "default_value": "anterior"
+        },
+        "meta": {
+          "interface": "select-dropdown",
+          "options": {
+            "choices": [
+              { "text": "Спереди (anterior)", "value": "anterior" },
+              { "text": "Сзади (posterior)", "value": "posterior" },
+              { "text": "Латерально (lateral)", "value": "lateral" },
+              { "text": "Медиально (medial)", "value": "medial" },
+              { "text": "Глубже (deep)", "value": "deep" },
+              { "text": "Поверхностно (superficial)", "value": "superficial" }
+            ]
+          }
+        }
+      },
+      {
+        "field": "distance_mm",
+        "type": "integer",
+        "meta": {
+          "interface": "input",
+          "options": {
+            "min": 0,
+            "max": 100
+          }
+        }
+      },
+      {
+        "field": "clinical_note",
+        "type": "text",
+        "meta": {
+          "interface": "textarea",
+          "options": {
+            "placeholder": "Риск повреждения при пункции..."
+          }
+        }
+      },
+      {
+        "field": "layer",
+        "type": "string",
+        "meta": {
+          "interface": "select-dropdown",
+          "options": {
+            "choices": [
+              { "text": "Кожа", "value": "cutaneous" },
+              { "text": "Подкожная клетчатка", "value": "subcutaneous" },
+              { "text": "Мышца", "value": "muscular" },
+              { "text": "Ретроперитонеальное пространство", "value": "retroperitoneal" },
+              { "text": "Медиастинум", "value": "mediastinal" }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}
