@@ -1,0 +1,9 @@
+{
+  "@id": "Illustrations",
+  "@type": "Class",
+  "@subdocument": [],
+  "svg_schematic": { "@type": "Optional", "@class": "xsd:string" },
+  "photo_cadaveric": { "@type": "Optional", "@class": "xsd:string" },
+  "ct_slice_axial": { "@type": "Optional", "@class": "xsd:string" },
+  "dsa_angiography": { "@type": "Optional", "@class": "xsd:string" }
+}
