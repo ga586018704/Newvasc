@@ -1,0 +1,14 @@
+{
+  "@id": "Drug",
+  "@type": "Class",
+  "@subdocument": [],
+  "name": "xsd:string",
+  "dosage": "xsd:string",
+  "frequency": "xsd:string",
+  "route": {
+    "@type": "Enum",
+    "@id": "Route",
+    "@values": ["oral", "iv", "im", "sc", "topical"]
+  },
+  "contraindications": { "@type": "Optional", "@class": "xsd:string" }
+}
